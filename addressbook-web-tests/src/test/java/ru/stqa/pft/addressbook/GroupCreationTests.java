@@ -30,7 +30,7 @@ public class GroupCreationTests {
     gotoGroup();
     groupCreation();
     fillGroupForm(new groupData("test1", "test1", "test1"));
-    submitGrouoCreation();
+    submitGroupCreation();
     returnToGroupPage();
 
   }
@@ -39,7 +39,7 @@ public class GroupCreationTests {
     wd.findElement(By.linkText("group page")).click();
   }
 
-  private void submitGrouoCreation() {
+  private void submitGroupCreation() {
     wd.findElement(By.name("submit")).click();
   }
 
