@@ -22,4 +22,13 @@ public class ContactHelper extends HelperBase{
       type(By.name("email"),addressData.getEmail());
     }
 
+
+
+    public void initAddressModification() {
+        click(By.xpath("//table[@id='maintable']/tbody/tr[3]/td[8]/a/img"));
+    }
+
+    public void submitAddressModification() {
+        click(By.xpath("//input[@name='update']"));
+    }
 }
