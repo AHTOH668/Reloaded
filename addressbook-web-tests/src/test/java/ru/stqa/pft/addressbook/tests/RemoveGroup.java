@@ -6,10 +6,10 @@ public class RemoveGroup extends TestBase {
 
   @Test
   public void testRemoveGroup() {
-    app.gotoGroup();
-    app.selectGroup();
-    app.deleteSelectedGroups();
-    app.returnToGroupPage();
+    app.getNavigationHelper().gotoGroup();
+    app.getGroupHelper().selectGroup();
+    app.getGroupHelper().deleteSelectedGroups();
+    app.getGroupHelper().returnToGroupPage();
   }
 
 
