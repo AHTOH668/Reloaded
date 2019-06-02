@@ -8,8 +8,7 @@ public class addNewAddress extends TestBase {
   @Test
   public void testAddNewUser() {
     app.getNavigationHelper().goToNewAddress();
-    app.getContactHelper().fillAddressForm(new addressData("Антон", "Подд", "8(495)1234567", "123@mail.com"));
-    app.getContactHelper().submitNewAddress();
+    app.getContactHelper().createContact(new addressData("Антон", "Подд", "8(495)1234567", "123@mail.com"));
   }
 
 }

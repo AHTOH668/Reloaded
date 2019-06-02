@@ -40,4 +40,13 @@ public class ContactHelper extends HelperBase{
         click(By.xpath("//input[@value='Delete']"));
         wd.switchTo().alert().accept();
     }
+
+    public void createContact(addressData contact) {
+        fillAddressForm(contact);
+        submitNewAddress();
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.xpath("//table[@id='maintable']/tbody/tr[2]/td/input"));
+    }
 }
