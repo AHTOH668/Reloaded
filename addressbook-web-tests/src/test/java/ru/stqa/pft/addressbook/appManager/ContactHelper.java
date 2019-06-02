@@ -25,7 +25,7 @@ public class ContactHelper extends HelperBase{
 
 
     public void initAddressModification() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[3]/td[8]/a/img"));
+        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
     }
 
     public void submitAddressModification() {
@@ -33,7 +33,7 @@ public class ContactHelper extends HelperBase{
     }
 
     public void selectContact() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[3]/td/input"));
+        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td/input"));
     }
 
     public void deleteContact() {
