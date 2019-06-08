@@ -3,13 +3,13 @@ package ru.stqa.pft.addressbook.models;
 import java.util.Objects;
 
 public class addressData {
-    private final String id;
+    private int id;
     private final String firstName;
     private final String lastName;
     private final String phone;
     private final String email;
 
-    public addressData(String id, String firstName, String lastName, String phone, String email) {
+    public addressData(int id, String firstName, String lastName, String phone, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -18,38 +18,15 @@ public class addressData {
     }
 
     public addressData(String firstName, String lastName, String phone, String email) {
-        this.id = null;
+        this.id = 0;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
         this.email = email;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        addressData that = (addressData) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(firstName, that.firstName) &&
-                Objects.equals(lastName, that.lastName);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName);
-    }
-
-    @Override
-    public String toString() {
-        return "addressData{" +
-                "id='" + id + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                '}';
-    }
-
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -69,4 +46,31 @@ public class addressData {
         return email;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        addressData that = (addressData) o;
+        return id == that.id &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(lastName, that.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName);
+    }
+
+    @Override
+    public String toString() {
+        return "addressData{" +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }
