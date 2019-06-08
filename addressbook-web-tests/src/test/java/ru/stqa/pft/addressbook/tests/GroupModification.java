@@ -3,7 +3,6 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.groupData;
-
 import java.util.Comparator;
 import java.util.List;
 
@@ -31,6 +30,6 @@ public class GroupModification extends TestBase {
         before.sort(byId);
         after.sort(byId);
         Assert.assertEquals(before, after);
-
     }
+
 }

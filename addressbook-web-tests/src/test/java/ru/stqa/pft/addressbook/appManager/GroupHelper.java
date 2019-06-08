@@ -45,7 +45,6 @@ public class GroupHelper extends HelperBase {
 
     public void submitGroupModification() {
         click(By.name("update"));
-
     }
 
     public boolean isThereAGroup() {
@@ -61,7 +60,6 @@ public class GroupHelper extends HelperBase {
 
     public int getGroupCount() {
         return wd.findElements(By.name("selected[]")).size();
-
     }
 
     public List<groupData> getGroupList() {

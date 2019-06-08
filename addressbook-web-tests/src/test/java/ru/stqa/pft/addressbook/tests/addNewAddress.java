@@ -3,7 +3,8 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.addressData;
-import java.util.HashSet;
+
+import java.util.Comparator;
 import java.util.List;
 
 public class addNewAddress extends TestBase {
@@ -17,16 +18,11 @@ public class addNewAddress extends TestBase {
     List<addressData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(before.size(), after.size() - 1); //why is it PASS????????
 
-    // max Id (see GroupCreationTest)
-    int max = 0;
-    for (addressData g : after) {
-      if (g.getId() > max) {
-        max = g.getId();
-      }
-    }
-    contact.setId(max);
     before.add(contact);
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+    Comparator<? super addressData> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
   }
 
 }
