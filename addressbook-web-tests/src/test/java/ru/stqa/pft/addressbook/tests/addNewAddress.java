@@ -17,15 +17,13 @@ public class addNewAddress extends TestBase {
     List<addressData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(before.size(), after.size() - 1); //why is it PASS????????
 
-
+    // max Id (see GroupCreationTest)
     int max = 0;
     for (addressData g : after) {
       if (g.getId() > max) {
         max = g.getId();
       }
     }
-
-
     contact.setId(max);
     before.add(contact);
     Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));

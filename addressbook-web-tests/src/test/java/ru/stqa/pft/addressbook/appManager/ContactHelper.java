@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.models.addressData;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +11,6 @@ public class ContactHelper extends HelperBase{
 
     public ContactHelper(WebDriver wd) {
         super(wd);
-
     }
 
     public void submitNewAddress() {
@@ -70,4 +68,5 @@ public class ContactHelper extends HelperBase{
         }
         return contacts;
     }
+
 }

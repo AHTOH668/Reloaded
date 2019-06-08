@@ -3,7 +3,6 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.addressData;
-
 import java.util.HashSet;
 import java.util.List;
 
@@ -28,4 +27,5 @@ public class AddressModification extends TestBase {
         before.add(contact);
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     }
+
 }

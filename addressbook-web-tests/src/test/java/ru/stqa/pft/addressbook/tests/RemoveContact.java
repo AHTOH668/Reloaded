@@ -3,7 +3,6 @@ package ru.stqa.pft.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.addressData;
-
 import java.util.List;
 
 public class RemoveContact extends TestBase {
@@ -24,4 +23,5 @@ public class RemoveContact extends TestBase {
         before.remove(before.size() - 1);
         Assert.assertEquals(before, after);
     }
+
 }
