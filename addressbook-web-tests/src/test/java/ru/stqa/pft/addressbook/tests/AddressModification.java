@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.addressData;
 
+import java.util.HashSet;
 import java.util.List;
 
 public class AddressModification extends TestBase {
@@ -17,9 +18,14 @@ public class AddressModification extends TestBase {
         }
         List<addressData> before = app.getContactHelper().getContactList();
         app.getContactHelper().initAddressModification(before.size() - 1);
-        app.getContactHelper().fillAddressForm (new addressData("rey", "brad", "795", "123@mail.ru"));
+        addressData contact = new addressData(before.get(before.size() - 1).getId(),"rey", "brad", "795", "123@mail.ru");
+        app.getContactHelper().fillAddressForm (contact);
         app.getContactHelper().submitAddressModification ();
         List<addressData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(before.size(), after.size()); //why is it PASS????????
+        Assert.assertEquals(before.size(), after.size());
+
+        before.remove(before.size() - 1);
+        before.add(contact);
+        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     }
 }

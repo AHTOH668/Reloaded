@@ -20,5 +20,8 @@ public class RemoveContact extends TestBase {
         app.getContactHelper().deleteContact();
         List<addressData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(before.size(), after.size() + 1); //why is it PASS????????
+
+        before.remove(before.size() - 1);
+        Assert.assertEquals(before, after);
     }
 }
