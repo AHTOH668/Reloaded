@@ -4,6 +4,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.addressData;
 
+import java.util.List;
+
 public class AddressModification extends TestBase {
 
     @Test
@@ -13,11 +15,11 @@ public class AddressModification extends TestBase {
             app.getNavigationHelper().goToNewAddress();
             app.getContactHelper().createContact(new addressData("Антон", "Подд", "8(495)1234567", "123@mail.com"));
         }
-        int before = app.getContactHelper().getContactCount();
+        List<addressData> before = app.getContactHelper().getContactList();
         app.getContactHelper().initAddressModification();
         app.getContactHelper().fillAddressForm (new addressData("rey", "brad", "795", "123@mail.ru"));
         app.getContactHelper().submitAddressModification ();
-        int after = app.getContactHelper().getContactCount();
-        Assert.assertEquals(before, after); //why is it PASS????????
+        List<addressData> after = app.getContactHelper().getContactList();
+        Assert.assertEquals(before.size(), after.size()); //why is it PASS????????
     }
 }
