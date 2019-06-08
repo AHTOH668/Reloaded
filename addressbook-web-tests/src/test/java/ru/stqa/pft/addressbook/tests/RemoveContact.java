@@ -16,7 +16,7 @@ public class RemoveContact extends TestBase {
             app.getContactHelper().createContact(new addressData("Антон", "Подд", "8(495)1234567", "123@mail.com"));
         }
         List<addressData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().selectContact();
+        app.getContactHelper().selectContact(before.size() - 1);
         app.getContactHelper().deleteContact();
         List<addressData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(before.size(), after.size() + 1); //why is it PASS????????

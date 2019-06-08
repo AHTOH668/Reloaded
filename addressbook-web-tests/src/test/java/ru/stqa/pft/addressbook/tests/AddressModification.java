@@ -16,7 +16,7 @@ public class AddressModification extends TestBase {
             app.getContactHelper().createContact(new addressData("Антон", "Подд", "8(495)1234567", "123@mail.com"));
         }
         List<addressData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().initAddressModification();
+        app.getContactHelper().initAddressModification(before.size() - 1);
         app.getContactHelper().fillAddressForm (new addressData("rey", "brad", "795", "123@mail.ru"));
         app.getContactHelper().submitAddressModification ();
         List<addressData> after = app.getContactHelper().getContactList();
