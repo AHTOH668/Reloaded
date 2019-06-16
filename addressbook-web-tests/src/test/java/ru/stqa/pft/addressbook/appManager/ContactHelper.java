@@ -4,8 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.models.addressData;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase{
 
@@ -24,18 +25,16 @@ public class ContactHelper extends HelperBase{
       type(By.name("email"),addressData.getEmail());
     }
 
-
-
-    public void initAddressModification(int index) {
-        wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
+    public void initAddressModificationById(int id) {
+        wd.findElement(By.cssSelector("a[href='edit.php?id=" + id +  "']")).click();
     }
 
     public void submitAddressModification() {
         click(By.xpath("//input[@name='update']"));
     }
 
-    public void selectContact(int index) {
-        wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr/td/input")).get(index).click();
+    public void selectContactById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id +  "']")).click();
     }
 
     public void deleteContact() {
@@ -48,14 +47,14 @@ public class ContactHelper extends HelperBase{
         submitNewAddress();
     }
 
-    public void modify(int index, addressData contact) {
-        initAddressModification(index);
+    public void modify(addressData contact) {
+        initAddressModificationById(contact.getId());
         fillAddressForm (contact);
         submitAddressModification ();
     }
 
-    public void remove(int index) {
-        selectContact(index);
+    public void remove(addressData contact) {
+        selectContactById(contact.getId());
         deleteContact();
     }
 
@@ -67,8 +66,8 @@ public class ContactHelper extends HelperBase{
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<addressData> list() {
-        List<addressData> contacts = new ArrayList<addressData>();
+    public Set<addressData> all() {
+        Set<addressData> contacts = new HashSet<addressData>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));

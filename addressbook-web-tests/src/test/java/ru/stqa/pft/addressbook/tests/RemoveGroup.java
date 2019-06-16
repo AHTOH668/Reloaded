@@ -4,27 +4,27 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.groupData;
-import java.util.List;
+import java.util.Set;
 
 public class RemoveGroup extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().groupPage();
-    if (app.group().list().size() == 0) {
+    if (app.group().all().size() == 0) {
       app.group().create(new groupData().withName("test1"));
     }
   }
 
   @Test
   public void testRemoveGroup() {
-    List<groupData> before = app.group().list();
-    int index = before.size() - 1;
-    app.group().remove(index);
-    List<groupData> after = app.group().list();
+    Set<groupData> before = app.group().all();
+    groupData deletedGroup = before.iterator().next();
+    app.group().remove(deletedGroup);
+    Set<groupData> after = app.group().all();
     Assert.assertEquals(after.size(),before.size() - 1);
 
-    before.remove(index);
+    before.remove(deletedGroup);
     Assert.assertEquals(before, after);
   }
 
