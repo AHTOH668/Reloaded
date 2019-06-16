@@ -1,24 +1,24 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.models.Contacts;
 import ru.stqa.pft.addressbook.models.addressData;
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 
 public class addNewAddress extends TestBase {
 
   @Test
   public void testAddNewUser() {
-    Set<addressData> before = app.contact().all();
+    Contacts before = app.contact().all();
     app.goTo().newAddress();
     addressData contact = new addressData().withFirstName("Антон").withLastName("Подд").withPhone("8(495)1234567").withEmail("123@mail.com");
     app.contact().create(contact);
-    Set<addressData> after = app.contact().all();
-    Assert.assertEquals(before.size(), after.size() - 1); //why is it PASS????????
+    Contacts after = app.contact().all();
+    assertThat(after.size(), equalTo(before.size() + 1)); //why is it PASS????????
 
-    contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
-    before.add(contact);
-    Assert.assertEquals(before, after);
+    assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 
 }

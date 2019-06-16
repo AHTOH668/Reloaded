@@ -1,11 +1,13 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.models.Contacts;
 import ru.stqa.pft.addressbook.models.addressData;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
-import java.util.Set;
 
 public class AddressModification extends TestBase {
 
@@ -20,16 +22,14 @@ public class AddressModification extends TestBase {
 
     @Test
     public void testAddressModification() {
-        Set<addressData> before = app.contact().all();
+        Contacts before = app.contact().all();
         addressData modifyContact = before.iterator().next();
         addressData contact = new addressData().withId(modifyContact.getId()).withFirstName("rey").withLastName("brad").withPhone("795").withEmail("123@mail.ru");
         app.contact().modify(contact);
-        Set<addressData> after = app.contact().all();
-        Assert.assertEquals(before.size(), after.size());
+        Contacts after = app.contact().all();
+        assertEquals(before.size(), after.size());
 
-        before.remove(modifyContact);
-        before.add(contact);
-        Assert.assertEquals(before, after);
+        assertThat(after, equalTo(before.without(modifyContact).withAdded(contact)));
     }
 
 }

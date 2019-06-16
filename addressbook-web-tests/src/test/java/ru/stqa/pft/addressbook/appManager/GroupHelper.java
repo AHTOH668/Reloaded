@@ -3,10 +3,10 @@ package ru.stqa.pft.addressbook.appManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import ru.stqa.pft.addressbook.models.Groups;
 import ru.stqa.pft.addressbook.models.groupData;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 public class GroupHelper extends HelperBase {
 
@@ -77,8 +77,8 @@ public class GroupHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public Set<groupData> all() {
-        Set<groupData> groups = new HashSet<groupData>();
+    public Groups all() {
+        Groups groups = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
