@@ -6,8 +6,12 @@ public class addressData {
     private int id = Integer.MAX_VALUE;;
     private String firstName;
     private String lastName;
-    private String phone;
+    private String address;
     private String email;
+    private String home;
+    private String mobile;
+    private String work;
+
 
 
     public int getId() {
@@ -22,13 +26,24 @@ public class addressData {
         return lastName;
     }
 
-
-    public String getPhone() {
-        return phone;
+    public String getAddress() {
+        return address;
     }
 
     public String getEmail() {
         return email;
+    }
+
+    public String getHome() {
+        return home;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public String getWork() {
+        return work;
     }
 
     public addressData withId(int id) {
@@ -46,13 +61,28 @@ public class addressData {
         return this;
     }
 
-    public addressData withPhone(String phone) {
-        this.phone = phone;
+    public addressData withAddress(String address) {
+        this.address = address;
         return this;
     }
 
     public addressData withEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public addressData withHome(String home) {
+        this.home = home;
+        return this;
+    }
+
+    public addressData withMobile(String mobile) {
+        this.mobile = mobile;
+        return this;
+    }
+
+    public addressData withWork(String work) {
+        this.work = work;
         return this;
     }
 

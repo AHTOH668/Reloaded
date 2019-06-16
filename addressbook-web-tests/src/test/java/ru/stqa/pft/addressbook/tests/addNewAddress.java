@@ -13,7 +13,7 @@ public class addNewAddress extends TestBase {
   public void testAddNewUser() {
     Contacts before = app.contact().all();
     app.goTo().newAddress();
-    addressData contact = new addressData().withFirstName("Антон").withLastName("Подд").withPhone("8(495)1234567").withEmail("123@mail.com");
+    addressData contact = new addressData().withFirstName("Антон").withLastName("Подд").withHome("8(495)1234567").withEmail("123@mail.com");
     app.contact().create(contact);
     assertThat(app.contact().count(),equalTo(before.size() + 1));
     Contacts after = app.contact().all();
