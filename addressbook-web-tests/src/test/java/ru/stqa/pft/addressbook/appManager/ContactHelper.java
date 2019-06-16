@@ -45,16 +45,19 @@ public class ContactHelper extends HelperBase{
     public void create(addressData contact) {
         fillAddressForm(contact);
         submitNewAddress();
+        contactCache = null;
     }
 
     public void modify(addressData contact) {
         initAddressModificationById(contact.getId());
         fillAddressForm (contact);
         submitAddressModification ();
+        contactCache = null;
     }
 
     public void remove(addressData contact) {
         selectContactById(contact.getId());
+        contactCache = null;
         deleteContact();
     }
 
@@ -66,16 +69,21 @@ public class ContactHelper extends HelperBase{
         return wd.findElements(By.name("selected[]")).size();
     }
 
+    private Contacts contactCache = null;
+
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             String firstName = element.findElement(By.xpath("./td[3]")).getText();
             String lastName = element.findElement(By.xpath("./td[2]")).getText();
-            contacts.add(new addressData().withId(id).withFirstName(firstName).withLastName(lastName));
+            contactCache.add(new addressData().withId(id).withFirstName(firstName).withLastName(lastName));
         }
-        return contacts;
+        return new Contacts(contactCache);
     }
 
 }
