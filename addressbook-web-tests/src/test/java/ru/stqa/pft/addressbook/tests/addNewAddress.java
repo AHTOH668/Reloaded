@@ -15,8 +15,8 @@ public class addNewAddress extends TestBase {
     app.goTo().newAddress();
     addressData contact = new addressData().withFirstName("Антон").withLastName("Подд").withPhone("8(495)1234567").withEmail("123@mail.com");
     app.contact().create(contact);
+    assertThat(app.contact().count(),equalTo(before.size() + 1));
     Contacts after = app.contact().all();
-    assertThat(after.size(), equalTo(before.size() + 1)); //why is it PASS????????
 
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
