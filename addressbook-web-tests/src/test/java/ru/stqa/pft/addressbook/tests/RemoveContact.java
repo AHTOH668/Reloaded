@@ -10,21 +10,22 @@ public class RemoveContact extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        app.getNavigationHelper().goToHome();
-        if (! app.getContactHelper().isThereAContact()) {
-            app.getNavigationHelper().goToNewAddress();
-            app.getContactHelper().createContact(new addressData("Антон", "Подд", "8(495)1234567", "123@mail.com"));
+        app.goTo().home();
+        if (app.contact().list().size() == 0) {
+            app.goTo().newAddress();
+            app.contact().create(new addressData().withFirstName("Антон").withLastName("Подд"));
         }
     }
 
     @Test
     public void testRemoveContact () {
-        List<addressData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().deleteContact();
-        List<addressData> after = app.getContactHelper().getContactList();
+        List<addressData> before = app.contact().list();
+        int index = before.size() - 1;
+        app.contact().remove(index);
+        List<addressData> after = app.contact().list();
         Assert.assertEquals(before.size(), after.size() + 1); //why is it PASS????????
-        before.remove(before.size() - 1);
+
+        before.remove(index);
         Assert.assertEquals(before, after);
     }
 

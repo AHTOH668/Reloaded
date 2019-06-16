@@ -43,15 +43,20 @@ public class ContactHelper extends HelperBase{
         wd.switchTo().alert().accept();
     }
 
-    public void createContact(addressData contact) {
+    public void create(addressData contact) {
         fillAddressForm(contact);
         submitNewAddress();
     }
 
-    public void modifyContact(int index, addressData contact) {
+    public void modify(int index, addressData contact) {
         initAddressModification(index);
         fillAddressForm (contact);
         submitAddressModification ();
+    }
+
+    public void remove(int index) {
+        selectContact(index);
+        deleteContact();
     }
 
     public boolean isThereAContact() {
@@ -62,15 +67,14 @@ public class ContactHelper extends HelperBase{
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<addressData> getContactList() {
+    public List<addressData> list() {
         List<addressData> contacts = new ArrayList<addressData>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             String firstName = element.findElement(By.xpath("./td[3]")).getText();
             String lastName = element.findElement(By.xpath("./td[2]")).getText();
-            addressData contact = new addressData(id, firstName, lastName, null, null);
-            contacts.add(contact);
+            contacts.add(new addressData().withId(id).withFirstName(firstName).withLastName(lastName));
         }
         return contacts;
     }

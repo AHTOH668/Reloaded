@@ -11,11 +11,11 @@ public class addNewAddress extends TestBase {
 
   @Test
   public void testAddNewUser() {
-    List<addressData> before = app.getContactHelper().getContactList();
-    app.getNavigationHelper().goToNewAddress();
-    addressData contact = new addressData("Антон", "Подд", "8(495)1234567", "123@mail.com");
-    app.getContactHelper().createContact(contact);
-    List<addressData> after = app.getContactHelper().getContactList();
+    List<addressData> before = app.contact().list();
+    app.goTo().newAddress();
+    addressData contact = new addressData().withFirstName("Антон").withLastName("Подд").withPhone("8(495)1234567").withEmail("123@mail.com");
+    app.contact().create(contact);
+    List<addressData> after = app.contact().list();
     Assert.assertEquals(before.size(), after.size() - 1); //why is it PASS????????
 
     before.add(contact);

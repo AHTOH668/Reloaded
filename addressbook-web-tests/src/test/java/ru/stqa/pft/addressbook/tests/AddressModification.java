@@ -11,20 +11,20 @@ public class AddressModification extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        app.getNavigationHelper().goToHome();
-        if (! app.getContactHelper().isThereAContact()) {
-            app.getNavigationHelper().goToNewAddress();
-            app.getContactHelper().createContact(new addressData("Антон", "Подд", "8(495)1234567", "123@mail.com"));
+        app.goTo().home();
+        if (app.contact().list().size() == 0) {
+            app.goTo().newAddress();
+            app.contact().create(new addressData().withFirstName("Антон").withLastName("Подд").withPhone("8(495)1234567").withEmail("123@mail.com"));
         }
     }
 
     @Test
     public void testAddressModification() {
-        List<addressData> before = app.getContactHelper().getContactList();
+        List<addressData> before = app.contact().list();
         int index = before.size() - 1;
-        addressData contact = new addressData(before.get(index).getId(),"rey", "brad", "795", "123@mail.ru");
-        app.getContactHelper().modifyContact(index, contact);
-        List<addressData> after = app.getContactHelper().getContactList();
+        addressData contact = new addressData().withId(before.get(index).getId()).withFirstName("rey").withLastName("brad").withPhone("795").withEmail("123@mail.ru");
+        app.contact().modify(index, contact);
+        List<addressData> after = app.contact().list();
         Assert.assertEquals(before.size(), after.size());
 
         before.remove(index);
