@@ -1,25 +1,29 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.addressData;
 import java.util.List;
 
 public class RemoveContact extends TestBase {
 
-    @Test
-    public void testRemoveContact () {
+    @BeforeMethod
+    public void ensurePreconditions() {
         app.getNavigationHelper().goToHome();
         if (! app.getContactHelper().isThereAContact()) {
             app.getNavigationHelper().goToNewAddress();
             app.getContactHelper().createContact(new addressData("Антон", "Подд", "8(495)1234567", "123@mail.com"));
         }
+    }
+
+    @Test
+    public void testRemoveContact () {
         List<addressData> before = app.getContactHelper().getContactList();
         app.getContactHelper().selectContact(before.size() - 1);
         app.getContactHelper().deleteContact();
         List<addressData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(before.size(), after.size() + 1); //why is it PASS????????
-
         before.remove(before.size() - 1);
         Assert.assertEquals(before, after);
     }

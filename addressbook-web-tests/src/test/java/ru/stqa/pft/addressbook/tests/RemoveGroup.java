@@ -1,19 +1,24 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.models.groupData;
 import java.util.List;
 
 public class RemoveGroup extends TestBase {
 
-  @Test
-  public void testRemoveGroup() {
+  @BeforeMethod
+  public void ensurePreconditions() {
     app.getNavigationHelper().gotoGroup();
     if (! app.getGroupHelper().isThereAGroup()) {
       app.getGroupHelper().createGroup(new groupData("test1", "test1", "test1"));
     }
-    List<groupData> before = app.getGroupHelper().getGroupList();
+  }
+
+  @Test
+  public void testRemoveGroup() {
+        List<groupData> before = app.getGroupHelper().getGroupList();
     app.getGroupHelper().selectGroup(before.size() - 1);
     app.getGroupHelper().deleteSelectedGroups();
     app.getGroupHelper().returnToGroupPage();

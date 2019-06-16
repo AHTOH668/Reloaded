@@ -48,6 +48,12 @@ public class ContactHelper extends HelperBase{
         submitNewAddress();
     }
 
+    public void modifyContact(int index, addressData contact) {
+        initAddressModification(index);
+        fillAddressForm (contact);
+        submitAddressModification ();
+    }
+
     public boolean isThereAContact() {
         return isElementPresent(By.xpath("//table[@id='maintable']/tbody/tr[2]/td/input"));
     }
