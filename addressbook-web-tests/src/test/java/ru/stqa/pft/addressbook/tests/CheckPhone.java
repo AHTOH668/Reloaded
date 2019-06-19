@@ -16,19 +16,24 @@ public class CheckPhone extends TestBase {
         app.goTo().home();
         if (app.contact().all().size() == 0) {
             app.goTo().newAddress();
-            app.contact().create(new addressData().withFirstName("Антон").withLastName("Подд").withHome("8(495)1234567").withEmail("123@mail.com").withMobile("111").withWork("222"));
+            app.contact().create(new addressData().withFirstName("Антон").withLastName("Подд")
+                    .withHome("8(495)1234567").withEmail("123@mail.com").withHome("795").withEmail("123@mail.ru")
+                    .withHome("888").withMobile("111").withWork("222"));
         }
     }
 
     @Test
-    public void checkPhones () {
-        app.goTo().home();
+    public void testAddressModification() {
         addressData contact = app.contact().all().iterator().next();
-        addressData contactInformation = app.contact().contactInformation(contact);
+        addressData contactInfoFromEditForm = app.contact().infoFromEditFrom(contact);
 
-        assertThat(contact.getHome(), equalTo(contactInformation.getHome()));
-        assertThat(contact.getMobile(), equalTo(contactInformation.getMobile()));
-        assertThat(contact.getWork(), equalTo(contactInformation.getWork()));
+        assertThat(contact.getHome(), equalTo(cleaned(contactInfoFromEditForm.getHome())));
+        assertThat(contact.getMobile(), equalTo(cleaned(contactInfoFromEditForm.getMobile())));
+        assertThat(contact.getWork(), equalTo(cleaned(contactInfoFromEditForm.getWork())));
+    }
+
+    public String cleaned(String phone) {
+        return phone.replace("\\s","").replaceAll("[-()]","");
     }
 
 }

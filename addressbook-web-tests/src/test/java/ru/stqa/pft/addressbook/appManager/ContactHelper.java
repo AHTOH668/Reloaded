@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.models.Contacts;
 import ru.stqa.pft.addressbook.models.addressData;
-
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -84,12 +83,13 @@ public class ContactHelper extends HelperBase {
             String firstName = element.findElement(By.xpath("./td[3]")).getText();
             String lastName = element.findElement(By.xpath("./td[2]")).getText();
             String[] phones = element.findElement(By.xpath("./td[6]")).getText().split("\n");
-            contactCache.add(new addressData().withId(id).withFirstName(firstName).withLastName(lastName).withHome(phones[0]).withMobile(phones[1]).withWork(phones[2]));
+            contactCache.add(new addressData().withId(id).withFirstName(firstName).withLastName(lastName)
+                    .withHome(phones[0]).withMobile(phones[1]).withWork(phones[2]));
         }
         return new Contacts(contactCache);
     }
 
-    public addressData contactInformation(addressData contact) {
+    public addressData infoFromEditFrom(addressData contact) {
         initAddressModificationById(contact.getId());
         String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
         String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
@@ -97,7 +97,8 @@ public class ContactHelper extends HelperBase {
         String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
         String work = wd.findElement(By.name("work")).getAttribute("value");
         wd.navigate().back();
-        return new addressData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname).withHome(home).withMobile(mobile).withWork(work);
+        return new addressData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
+                .withHome(home).withMobile(mobile).withWork(work);
     }
 
 }
