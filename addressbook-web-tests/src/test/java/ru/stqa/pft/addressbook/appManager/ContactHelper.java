@@ -82,9 +82,9 @@ public class ContactHelper extends HelperBase {
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             String firstName = element.findElement(By.xpath("./td[3]")).getText();
             String lastName = element.findElement(By.xpath("./td[2]")).getText();
-            String[] phones = element.findElement(By.xpath("./td[6]")).getText().split("\n");
+            String allPhones = element.findElement(By.xpath("./td[6]")).getText();
             contactCache.add(new addressData().withId(id).withFirstName(firstName).withLastName(lastName)
-                    .withHome(phones[0]).withMobile(phones[1]).withWork(phones[2]));
+                    .withAllPhones(allPhones));
         }
         return new Contacts(contactCache);
     }

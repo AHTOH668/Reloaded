@@ -11,6 +11,7 @@ public class addressData {
     private String home;
     private String mobile;
     private String work;
+    private String allPhones;
 
 
 
@@ -46,28 +47,13 @@ public class addressData {
         return work;
     }
 
+    public String getAllPhones() {
+        return allPhones;
+    }
+
     public addressData withId(int id) {
         this.id = id;
         return this;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        addressData that = (addressData) o;
-        return id == that.id &&
-                Objects.equals(firstName, that.firstName) &&
-                Objects.equals(lastName, that.lastName) &&
-                Objects.equals(address, that.address) &&
-                Objects.equals(home, that.home) &&
-                Objects.equals(mobile, that.mobile) &&
-                Objects.equals(work, that.work);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, home, mobile, work);
     }
 
     public addressData withFirstName(String firstName) {
@@ -105,6 +91,11 @@ public class addressData {
         return this;
     }
 
+    public addressData withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "addressData{" +
@@ -115,6 +106,26 @@ public class addressData {
                 ", mobile='" + mobile + '\'' +
                 ", work='" + work + '\'' +
                 '}';
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        addressData that = (addressData) o;
+        return id == that.id &&
+                Objects.equals(firstName, that.firstName) &&
+                Objects.equals(lastName, that.lastName) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(home, that.home) &&
+                Objects.equals(mobile, that.mobile) &&
+                Objects.equals(work, that.work) &&
+                Objects.equals(allPhones, that.allPhones);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, address, home, mobile, work, allPhones);
     }
 
 }
