@@ -16,7 +16,7 @@ public class AddressModification extends TestBase {
         if (app.contact().all().size() == 0) {
             app.goTo().newAddress();
             app.contact().create(new addressData().withFirstName("Антон").withLastName("Подд")
-                    .withHome("8(495)1234567").withEmail("123@mail.com"));
+                    .withHome("8(495)1234567").withEmail("123@mail.com").withAddress("Street"));
         }
     }
 
