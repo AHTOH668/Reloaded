@@ -15,8 +15,7 @@ public class AddressModification extends TestBase {
         app.goTo().home();
         if (app.contact().all().size() == 0) {
             app.goTo().newAddress();
-            app.contact().create(new addressData().withFirstName("Антон").withLastName("Подд")
-                    .withHome("8(495)1234567").withEmail("123@mail.com").withAddress("Street"));
+            app.contact().create(new addressData().withFirstName("Антон").withLastName("Подд"));
         }
     }
 
@@ -25,7 +24,7 @@ public class AddressModification extends TestBase {
         Contacts before = app.contact().all();
         addressData modifyContact = before.iterator().next();
         addressData contact = new addressData().withId(modifyContact.getId()).withFirstName("rey").withLastName("brad")
-                .withHome("795").withEmail("123@mail.ru").withHome("888").withMobile("111").withWork("222");
+                .withHome("795").withEmail("123@mail.ru");
         app.contact().modify(contact);
         assertThat(app.contact().count(),equalTo(before.size()));
         Contacts after = app.contact().all();
