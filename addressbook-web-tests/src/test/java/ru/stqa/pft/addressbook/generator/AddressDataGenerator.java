@@ -1,5 +1,8 @@
 package ru.stqa.pft.addressbook.generator;
 
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
+import com.beust.jcommander.ParameterException;
 import ru.stqa.pft.addressbook.models.addressData;
 
 import java.io.File;
@@ -12,14 +15,29 @@ import java.util.List;
 
 public class AddressDataGenerator {
 
+    @Parameter(names =  "-c", description = "Group count")
+    public int count;
+
+    @Parameter (names = "-f", description = "Target file")
+    public String file;
+
     public static void main (String[] args) throws IOException {
-        int count = Integer.parseInt(args[0]);
-        File file = new File(args[1]);
-        List<addressData> contacts = generateContacts(count);
-        save(contacts, file);
+        AddressDataGenerator generator = new AddressDataGenerator();
+        JCommander jCommander = new JCommander(generator);
+        try {
+            jCommander.parse(args);
+        } catch (ParameterException ex) {
+            jCommander.usage();
+        }
+        generator.run();
     }
 
-    private static void save(List<addressData> contacts, File file) throws IOException {
+    private void run() throws IOException {
+        List<addressData> contacts = generateContacts(count);
+        save(contacts, new File(file));
+    }
+
+    private void save(List<addressData> contacts, File file) throws IOException {
         Writer writer = new FileWriter(file);
         for (addressData contact : contacts) {
             writer.write(String.format("%s;%s;%s\n", contact.getFirstName(), contact.getLastName(), contact.getEmail()));
@@ -27,7 +45,7 @@ public class AddressDataGenerator {
         writer.close();
     }
 
-    private static List<addressData> generateContacts(int count) {
+    private List<addressData> generateContacts(int count) {
         List<addressData> contacts = new ArrayList<addressData>();
         for (int i = 0; i < count; i++) {
             contacts.add(new addressData().withFirstName(String.format("Антон %s", i))
