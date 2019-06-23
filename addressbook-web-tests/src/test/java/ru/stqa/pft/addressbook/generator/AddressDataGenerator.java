@@ -51,26 +51,26 @@ public class AddressDataGenerator {
     private void saveAsJson(List<addressData> contacts, File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         String json = gson.toJson(contacts);
-        Writer writer = new FileWriter(file);
-        writer.write(json);
-        writer.close();
+        try (Writer writer = new FileWriter(file)) {
+            writer.write(json);
+        }
     }
 
     private void saveAsCsv(List<addressData> contacts, File file) throws IOException {
         System.out.println(new File(".").getAbsolutePath());
-        Writer writer = new FileWriter(file);
-        for (addressData contact : contacts) {
-            writer.write(String.format("%s;%s;%s\n", contact.getFirstName(), contact.getLastName(), contact.getEmail()));
+        try (Writer writer = new FileWriter(file)) {
+            for (addressData contact : contacts) {
+                writer.write(String.format("%s;%s;%s\n", contact.getFirstName(), contact.getLastName(), contact.getEmail()));
+            }
         }
-        writer.close();
     }
 
     private void save(List<addressData> contacts, File file) throws IOException {
-        Writer writer = new FileWriter(file);
-        for (addressData contact : contacts) {
-            writer.write(String.format("%s;%s;%s\n", contact.getFirstName(), contact.getLastName(), contact.getEmail()));
+        try (Writer writer = new FileWriter(file)) {
+            for (addressData contact : contacts) {
+                writer.write(String.format("%s;%s;%s\n", contact.getFirstName(), contact.getLastName(), contact.getEmail()));
+            }
         }
-        writer.close();
     }
 
     private List<addressData> generateContacts(int count) {
