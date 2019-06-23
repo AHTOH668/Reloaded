@@ -102,11 +102,6 @@ public class addressData {
                 "id='" + id + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", address='" + address + '\'' +
-                ", email='" + email + '\'' +
-                ", home='" + home + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", work='" + work + '\'' +
                 '}';
     }
     @Override
