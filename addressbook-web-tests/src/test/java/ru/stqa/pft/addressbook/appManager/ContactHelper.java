@@ -20,11 +20,11 @@ public class ContactHelper extends HelperBase {
     public void fillAddressForm(addressData addressData) {
         type(By.name("firstname"), addressData.getFirstName());
         type(By.name("lastname"), addressData.getLastName());
-        type(By.name("address"), addressData.getAddress());
+        //type(By.name("address"), addressData.getAddress());
         type(By.name("email"), addressData.getEmail());
-        type(By.name("home"), addressData.getHome());
-        type(By.name("mobile"), addressData.getMobile());
-        type(By.name("work"), addressData.getWork());
+        //type(By.name("home"), addressData.getHome());
+        //type(By.name("mobile"), addressData.getMobile());
+        //type(By.name("work"), addressData.getWork());
     }
 
     public void initAddressModificationById(int id) {
