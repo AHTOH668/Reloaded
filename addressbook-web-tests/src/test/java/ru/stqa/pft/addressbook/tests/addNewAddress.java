@@ -35,7 +35,7 @@ public class addNewAddress extends TestBase {
     }
   }
 
-  @Test (dataProvider = "validContactsFromJson")
+  @Test //(dataProvider = "validContactsFromJson")
   public void testAddNewUser(addressData contact) {
     app.goTo().newAddress();
     Contacts before = app.contact().all();

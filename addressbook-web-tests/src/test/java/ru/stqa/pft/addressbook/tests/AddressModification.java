@@ -23,13 +23,23 @@ public class AddressModification extends TestBase {
     public void testAddressModification() {
         Contacts before = app.contact().all();
         addressData modifyContact = before.iterator().next();
-        addressData contact = new addressData().withId(modifyContact.getId()).withFirstName("rey").withLastName("brad")
-                .withHome("795").withEmail("123@mail.ru");
+        addressData contact = new addressData()
+                .withId(modifyContact.getId()).withFirstName("rey").withLastName("brad");
         app.contact().modify(contact);
         assertThat(app.contact().count(),equalTo(before.size()));
-        Contacts after = app.contact().all();
 
-        assertThat(after, equalTo(before.without(modifyContact).withAdded(contact)));
+        addressData contactInfoFromEditForm = app.contact().infoFromEditFrom(contact);
+        assertThat(contact.getFirstName(), equalTo(mergeFirstName(contactInfoFromEditForm)));
+        assertThat(contact.getLastName(), equalTo(mergeLastName(contactInfoFromEditForm)));
     }
+
+    private String mergeFirstName(addressData contact) {
+        return contact.getFirstName();
+    }
+
+    private String mergeLastName(addressData contact) {
+        return contact.getLastName();
+    }
+
 
 }
