@@ -105,7 +105,8 @@ public class ContactHelper extends HelperBase {
         String email3 = wd.findElement(By.name("email3")).getAttribute("value");
         wd.navigate().back();
         return new addressData().withId(contact.getId()).withFirstName(firstname).withLastName(lastname)
-                .withHome(home).withMobile(mobile).withWork(work).withAddress(address)
+                .withHome(home).withMobile(mobile).withWork(work)
+                .withAddress(address)
                 .withEmail(email).withEmail2(email2).withEmail3(email3);
     }
 
