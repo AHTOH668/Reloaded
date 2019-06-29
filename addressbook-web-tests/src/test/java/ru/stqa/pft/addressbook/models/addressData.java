@@ -1,7 +1,6 @@
 package ru.stqa.pft.addressbook.models;
 
 import com.google.gson.annotations.Expose;
-
 import java.util.Objects;
 
 public class addressData {
@@ -11,13 +10,14 @@ public class addressData {
     @Expose
     private String lastName;
     private String address;
-    @Expose
     private String email;
+    private String email2;
+    private String email3;
     private String home;
     private String mobile;
     private String work;
     private String allPhones;
-
+    private String allEmails;
 
 
     public int getId() {
@@ -40,6 +40,14 @@ public class addressData {
         return email;
     }
 
+    public String getEmail2() {
+        return email2;
+    }
+
+    public String getEmail3() {
+        return email3;
+    }
+
     public String getHome() {
         return home;
     }
@@ -54,6 +62,10 @@ public class addressData {
 
     public String getAllPhones() {
         return allPhones;
+    }
+
+    public String getAllEmails() {
+        return allEmails;
     }
 
     public addressData withId(int id) {
@@ -81,6 +93,16 @@ public class addressData {
         return this;
     }
 
+    public addressData withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public addressData withEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
+
     public addressData withHome(String home) {
         this.home = home;
         return this;
@@ -101,6 +123,11 @@ public class addressData {
         return this;
     }
 
+    public addressData withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "addressData{" +
@@ -117,17 +144,13 @@ public class addressData {
         return id == that.id &&
                 Objects.equals(firstName, that.firstName) &&
                 Objects.equals(lastName, that.lastName) &&
-                Objects.equals(address, that.address) &&
-                Objects.equals(home, that.home) &&
-                Objects.equals(mobile, that.mobile) &&
-                Objects.equals(work, that.work) &&
-                Objects.equals(allPhones, that.allPhones);
+                Objects.equals(address, that.address);
 
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, address, home, mobile, work, allPhones);
+        return Objects.hash(id, firstName, lastName, address);
     }
 
 }
