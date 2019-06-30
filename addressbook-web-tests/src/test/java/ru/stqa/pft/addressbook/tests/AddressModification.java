@@ -29,6 +29,7 @@ public class AddressModification extends TestBase {
         assertThat(app.contact().count(),equalTo(before.size()));
         Contacts after = app.dbc().contacts();
         assertThat(after, equalTo(before.without(modifyContact).withAdded(contact)));
+        verifyContactListInUI();
     }
 
     private String mergeFirstName(addressData contact) {

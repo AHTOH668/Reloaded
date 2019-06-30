@@ -44,5 +44,6 @@ public class addNewAddress extends TestBase {
     Contacts after = app.dbc().contacts();
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+    verifyContactListInUI();
   }
 }
