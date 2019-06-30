@@ -77,12 +77,14 @@ public class groupData {
         if (o == null || getClass() != o.getClass()) return false;
         groupData groupData = (groupData) o;
         return id == groupData.id &&
-                Objects.equals(name, groupData.name);
+                Objects.equals(name, groupData.name) &&
+                Objects.equals(header, groupData.header) &&
+                Objects.equals(footer, groupData.footer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id, name, header, footer);
     }
 
 }
