@@ -2,11 +2,11 @@ package ru.stqa.pft.addressbook.models;
 
 import com.google.gson.annotations.Expose;
 import org.hibernate.annotations.Type;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity
@@ -26,8 +26,10 @@ public class groupData {
     @Type(type = "test")
     private String footer;
 
+    @ManyToMany (mappedBy = "groups")
+    private Set<addressData> contacts = new HashSet<addressData>();
 
-    public int getId() {
+        public int getId() {
         return id;
     }
 
@@ -61,6 +63,10 @@ public class groupData {
     public groupData withFooter(String footer) {
         this.footer = footer;
         return this;
+    }
+
+    public Contacts getContacts() {
+        return new Contacts(contacts);
     }
 
     @Override
