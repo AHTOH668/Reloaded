@@ -1,24 +1,58 @@
 package ru.stqa.pft.addressbook.models;
 
-import com.google.gson.annotations.Expose;
+import org.hibernate.annotations.Type;
+import javax.persistence.*;
+import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+
+@Entity
+@Table(name = "addressbook")
 public class addressData {
+
+    @Id
+    @Column (name = "id")
     private int id = Integer.MAX_VALUE;
-    @Expose
+    @Column (name = "firstname")
     private String firstName;
-    @Expose
+    @Column (name = "lastname")
     private String lastName;
+    @Column (name = "address")
     private String address;
+    @Column (name = "email")
     private String email;
+    @Column (name = "email2")
     private String email2;
+    @Column (name = "email3")
     private String email3;
+    @Column (name = "home")
+    @Type(type = "text")
     private String home;
+    @Column (name = "mobile")
+    @Type(type = "text")
     private String mobile;
+    @Column (name = "work")
+    @Type(type = "text")
     private String work;
+    @Transient
     private String allPhones;
+    @Transient
     private String allEmails;
 
+    @Column(name = "photo")
+    @Type(type = "text")
+    private String photo;
+
+    @ManyToMany (fetch = FetchType.EAGER)
+    @JoinTable (name = "address_in_groups",
+            joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<groupData> groups = new HashSet<groupData>();
+
+    public File getPhoto () {
+        return new File(photo);
+    }
 
     public int getId() {
         return id;
@@ -66,6 +100,10 @@ public class addressData {
 
     public String getAllEmails() {
         return allEmails;
+    }
+
+    public Groups getGroups() {
+        return new Groups(groups);
     }
 
     public addressData withId(int id) {
@@ -128,6 +166,11 @@ public class addressData {
         return this;
     }
 
+    public addressData withPhoto(File photo) {
+        this.photo = photo.getPath();
+        return this;
+    }
+
     @Override
     public String toString() {
         return "addressData{" +
@@ -136,6 +179,7 @@ public class addressData {
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -143,13 +187,18 @@ public class addressData {
         addressData that = (addressData) o;
         return id == that.id &&
                 Objects.equals(firstName, that.firstName) &&
-                Objects.equals(lastName, that.lastName);
-
+                Objects.equals(lastName, that.lastName) &&
+                Objects.equals(address, that.address) &&
+                Objects.equals(email, that.email) &&
+                Objects.equals(email2, that.email2) &&
+                Objects.equals(email3, that.email3) &&
+                Objects.equals(home, that.home) &&
+                Objects.equals(mobile, that.mobile) &&
+                Objects.equals(work, that.work);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName);
+        return Objects.hash(id, firstName, lastName, address, email, email2, email3, home, mobile, work);
     }
-
 }

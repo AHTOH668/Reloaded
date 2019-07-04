@@ -1,6 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
-/*import org.hibernate.Session;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -45,4 +45,4 @@ public class HbConnectionTest {
         session.getTransaction().commit();
         session.close();
     }
-}*/
+}

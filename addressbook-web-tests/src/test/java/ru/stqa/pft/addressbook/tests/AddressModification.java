@@ -13,7 +13,7 @@ public class AddressModification extends TestBase {
     @BeforeMethod
     public void ensurePreconditions() {
         app.goTo().home();
-        if (app.contact().all().size() == 0) {
+        if (app.dbc().contacts().size() == 0) {
             app.goTo().newAddress();
             app.contact().create(new addressData().withFirstName("РђРЅС‚РѕРЅ").withLastName("РџРѕРґРґ"));
         }
@@ -21,16 +21,15 @@ public class AddressModification extends TestBase {
 
     @Test
     public void testAddressModification() {
-        Contacts before = app.contact().all();
+        Contacts before = app.dbc().contacts();
         addressData modifyContact = before.iterator().next();
         addressData contact = new addressData()
                 .withId(modifyContact.getId()).withFirstName("rey").withLastName("brad");
         app.contact().modify(contact);
         assertThat(app.contact().count(),equalTo(before.size()));
-
-        addressData contactInfoFromEditForm = app.contact().infoFromEditFrom(contact);
-        assertThat(contact.getFirstName(), equalTo(mergeFirstName(contactInfoFromEditForm)));
-        assertThat(contact.getLastName(), equalTo(mergeLastName(contactInfoFromEditForm)));
+        Contacts after = app.dbc().contacts();
+        assertThat(after, equalTo(before.without(modifyContact).withAdded(contact)));
+        verifyContactListInUI();
     }
 
     private String mergeFirstName(addressData contact) {
