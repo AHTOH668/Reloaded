@@ -75,8 +75,8 @@ public class AddressDataGenerator {
     private List<addressData> generateContacts(int count) {
         List<addressData> contacts = new ArrayList<addressData>();
         for (int i = 0; i < count; i++) {
-            contacts.add(new addressData().withFirstName(String.format("РђРЅС‚РѕРЅ %s", i))
-                    .withLastName(String.format("РџРѕРґРґ %s", i)).withEmail(String.format("123@email.ru %s",i)));
+            contacts.add(new addressData().withFirstName(String.format("Антон  %s", i))
+                    .withLastName(String.format("Подд %s", i)).withEmail(String.format("123@email.ru %s",i)));
         }
         return contacts;
     }
