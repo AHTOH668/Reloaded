@@ -7,7 +7,6 @@ import ru.stqa.pft.addressbook.models.Contacts;
 import ru.stqa.pft.addressbook.models.addressData;
 import java.util.List;
 
-
 public class ContactHelper extends HelperBase {
 
     public ContactHelper(WebDriver wd) {

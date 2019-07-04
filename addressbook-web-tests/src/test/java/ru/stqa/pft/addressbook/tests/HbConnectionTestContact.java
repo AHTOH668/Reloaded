@@ -1,17 +1,6 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
-import ru.stqa.pft.addressbook.models.addressData;
-import java.util.List;
-
-
-public class HbConnectionTestContact {
+/*public class HbConnectionTestContact {
 
 
     private SessionFactory sessionFactory;
@@ -45,4 +34,4 @@ public class HbConnectionTestContact {
         session.getTransaction().commit();
         session.close();
     }
-}
+}*/

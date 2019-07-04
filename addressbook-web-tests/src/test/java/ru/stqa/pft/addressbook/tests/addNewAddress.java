@@ -38,12 +38,11 @@ public class addNewAddress extends TestBase {
   @Test //(dataProvider = "validContactsFromJson")
   public void testAddNewUser(addressData contact) {
     app.goTo().newAddress();
-    Contacts before = app.dbc().contacts();
+    Contacts before = app.contact().all();
     app.contact().create(contact);
     assertThat(app.contact().count(),equalTo(before.size() + 1));
-    Contacts after = app.dbc().contacts();
+    Contacts after = app.contact().all();
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-    verifyContactListInUI();
   }
 }

@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appManager;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,8 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 
 public class ApplicationManager {
-
-
     private final Properties properties;
     WebDriver wd;
 
@@ -23,8 +22,6 @@ public class ApplicationManager {
     private ContactHelper contactHelper;
     private GroupHelper groupHelper;
     private String browser;
-    private DbHelper dbHelper;
-    private DbHelperContact dbHelperContact;
 
 
     public ApplicationManager (String browser) throws IOException {
@@ -32,13 +29,10 @@ public class ApplicationManager {
         properties = new Properties();
     }
 
+
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
-
-        dbHelper = new DbHelper();
-        dbHelperContact = new DbHelperContact();
-
         if (browser.equals(BrowserType.FIREFOX)) {
             wd = new FirefoxDriver();
         } else if (browser.equals(BrowserType.CHROME)) {
@@ -69,13 +63,5 @@ public class ApplicationManager {
 
     public NavigationHelper goTo() {
         return navigationHelper;
-    }
-
-    public DbHelper db() {
-        return dbHelper;
-    }
-
-    public DbHelperContact dbc() {
-        return dbHelperContact;
     }
 }

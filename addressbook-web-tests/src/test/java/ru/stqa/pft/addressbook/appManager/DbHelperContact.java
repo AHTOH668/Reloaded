@@ -1,6 +1,6 @@
 package ru.stqa.pft.addressbook.appManager;
 
-import org.hibernate.Session;
+/*import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -31,4 +31,4 @@ public class DbHelperContact {
         session.close();
         return new Contacts(result);
     }
-}
+}*/
