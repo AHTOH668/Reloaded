@@ -15,7 +15,7 @@ public class CheckAddress extends TestBase {
         app.goTo().home();
         if (app.contact().all().size() == 0) {
             app.goTo().newAddress();
-            app.contact().create(new addressData().withFirstName("РђРЅС‚РѕРЅ").withLastName("РџРѕРґРґ")
+            app.contact().create(new addressData().withFirstName("Антон").withLastName("Подд")
                     .withAddress("Street").withEmail("123@mail.com")
                     .withHome("888").withMobile("111").withWork("222"));
         }
