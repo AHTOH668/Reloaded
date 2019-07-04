@@ -15,7 +15,7 @@ public class AddressModification extends TestBase {
         app.goTo().home();
         if (app.dbc().contacts().size() == 0) {
             app.goTo().newAddress();
-            app.contact().create(new addressData().withFirstName("РђРЅС‚РѕРЅ").withLastName("РџРѕРґРґ"));
+            app.contact().create(new addressData().withFirstName("Антон").withLastName("Подд"));
         }
     }
 
